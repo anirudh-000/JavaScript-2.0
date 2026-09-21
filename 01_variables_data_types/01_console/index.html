@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Console</title>
+	</head>
+	<body style="background-color: black">
+		<h1 style="color: white">Console</h1>
+		<!-- Inject Eruda via CDN -->
+		<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+		<script>
+			eruda.init();
+
+			// Restore saved state
+			const isErudaOpen = localStorage.getItem('eruda_open') !== 'false';
+			if (isErudaOpen) {
+				eruda.show();
+			}
+
+			// Attach event listeners to _devTools instance
+			if (eruda._devTools) {
+				eruda._devTools.on('show', function () {
+					localStorage.setItem('eruda_open', 'true');
+				});
+				eruda._devTools.on('hide', function () {
+					localStorage.setItem('eruda_open', 'false');
+				});
+			}
+		</script>
+		<script src="script.js"></script>
+	</body>
+</html>
